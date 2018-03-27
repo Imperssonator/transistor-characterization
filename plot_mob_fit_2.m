@@ -1,4 +1,4 @@
-function [] = plot_mob_fit_2(ms,devNums)
+function [] = plot_mob_fit_dir(dd,devNums)
 
 f=figure;
 ax=gca;
@@ -6,13 +6,13 @@ hold(ax,'on')
 
 for d = devNums
 
-    fit = ms(d).fit;
+    fit = dd(d).fit_fun;
     
-    vg = ms(d).vg(67:end);
-    id = ms(d).id(67:end);
+    vg = dd(d).vg_mat;
+    id = dd(d).id_mat;
     
-    plot(vg,sqrt(-id),'ok','MarkerSize',8,'LineWidth',1)
-    fplot(ax,@(x) sqrt(-fit(x)),[-80,0],'-b','LineWidth',2);
+    plot(vg,sqrt(abs(id)),'--r','LineWidth',1)
+    fplot(ax,@(x) sqrt(-fit(x)),[dd(d).vt,max(vg)],'-b','LineWidth',1);
     
 end
 

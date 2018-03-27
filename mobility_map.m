@@ -17,6 +17,8 @@ end
 MM = zeros(7,9);
 VT_mat = zeros(7,9);
 
+DE = 3.9; % Dielectric constant of SiO2
+vg_lims = [40,79];
 L_vec = [5,10,20,25,50,80,100];
 L2N = struct('A',1,...
              'B',2,...
@@ -35,7 +37,7 @@ DD(i).ChanLetter = DD(i).name(end-5);
 DD(i).ChanCol = L2N.(DD(i).ChanLetter); % This is a wizard-level MATLAB trick to get around the lack of dictionaries
 DD(i).ChanLen = L_vec(DD(i).ChanRow-2)*1E-6;
 
-[mob, VT, vg_mat, id_mat, fit_fun] = calcMobIV(DD(i).path,200E-9,1E-3,DD(i).ChanLen);
+[mob, VT, vg_mat, id_mat, fit_fun] = calcMobIV(DD(i).path,200E-9,1E-3,DD(i).ChanLen,DE,vg_lims);
 
 DD(i).mob=mob;
 DD(i).vt=VT;
